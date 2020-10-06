@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+
+#login_area{
+    background: #0CF;
+    width: 250px;
+    height: 250px;
+    padding: 50px;
+    position: relative;
+    left: 36%;
+    top: 80px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    color: #009;
+    border: 1px solid #003;
+    border-radius: 12px;
+    /* this is another css property that we haven't discussed..we can set box shadow using this code
+    and can give up to 4 values to set the following properties..
+    box-shadow: h-shadow v-shadow blur spred;	
+    */
+    box-shadow: 3px 3px 3px 3px;
+}
+#login_area:hover{
+    background: #00B9E8;
+}
+input[type=text],input[type=password]{
+    width: 250px;
+    height: 30px;
+    background: #FF9;
+    border:1px solid #00F;
+    font-size:14pt;
+}
+input[type=text]:focus,input[type=password]:focus{
+    background:#FC6;
+}
+
+#login_area a{
+    color:#006;
+}
+#login_area a:hover{
+    color:blue;
+}
+input[type=submit]{
+    background: #009;
+    color: #FFF;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    position: relative;
+    border: 1px solid #000;
+    /* we only discussed the general border radius property to smooth all edges..But we can set it for some edges only */
+    border-top-left-radius: 20px;	
+    border-bottom-right-radius: 20px;	
+}
+input[type=submit]:hover{
+    background:#00C;
+}
+
+input[type=submit]:active{
+    background:#03C;
+}
+
+

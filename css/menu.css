@@ -1,0 +1,113 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*  background: #74b55b;
+    Created on : Jul 6, 2015, 3:57:50 AM
+    Author     : Acer
+*/
+    	
+	/* Menu General Styles */
+.menuBackground {
+
+}
+.dropDownMenu a {
+	color: #FFF;
+}
+.dropDownMenu,
+.dropDownMenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.dropDownMenu li {
+	position: relative;
+}
+.dropDownMenu a {
+	padding: 10px 20px;
+	display: block;
+	text-decoration: none;
+}
+.dropDownMenu a:hover {
+	background: #000;
+}
+
+
+/* Level 1 Drop Down Menu */
+.dropDownMenu > li {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: -4px; /* solve the 4 pixels spacing between list-items */
+}
+.dropDownMenu > li:first-child {
+	margin-left: 0;
+}
+.dropDownMenu > li > a {}
+.dropDownMenu > li > a:hover {}
+
+/* Level 2 */
+.dropDownMenu > li > ul {
+	text-align: left;
+	width: auto; /* change auto value with 200px if you want a bigger menu */
+	display: none;
+	background: #5DBB04;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 9999999; /* if you have YouTube iframes, is good to have a bigger z-index so the video can appear above the video */
+}
+.dropDownMenu > li:hover > ul {
+	display: block;
+}
+.dropDownMenu ul li a {}
+.dropDownMenu ul li a:hover {}
+
+/* Level 3 */
+.dropDownMenu > li > ul > li > ul {
+	text-align: left;
+	display: none;
+	background: #99FFCC;
+	position: absolute;
+	left: 100%;
+	top: 0;
+	z-index: 9999999;
+}
+.dropDownMenu > li > ul > li:hover > ul {
+	display: block;
+}
+.dropDownMenu ul ul li {}
+.dropDownMenu ul ul li a {}
+.dropDownMenu ul ul li a:hover {}
+
+
+  img:hover
+{
+ opacity:2.0;
+ filter:alpha(opacity=200); /* For IE8 and earlier */
+}
+#view {
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 0%;
+  width:30%;
+  padding:10;
+  border-radius:30px;
+  background:#F0FFF0;
+  font:14;
+}
+
+.menu{
+  height:60px;
+  width:60px;
+  opacity:0.8;
+  filter:alpha(opacity=100%); /* For IE8 and earlier */
+}
+
+html { 
+  background: url(images/agriculture-waste-water-adobestock_86772407.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

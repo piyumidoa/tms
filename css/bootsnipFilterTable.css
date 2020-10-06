@@ -1,0 +1,20 @@
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading div {
+    margin-top: -18px;
+    font-size: 15px;
+}
+
+
+/*.panel-heading div span{
+    margin-left:5px;
+}*/
+.filterTableSearch{
+    display: none;
+    
+}
+
+table {border-collapse:collapse; table-layout:fixed; width:310px;}
+       table td {border:solid 1px #fab; width:100px; word-wrap:break-word;}

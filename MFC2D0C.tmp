@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Login | TDSS for DOA</title>
+ <link href="css/login.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+#apDiv1 {
+	position: absolute;
+	width: 787px;
+	height: 115px;
+	z-index: 1;
+	left: 140px;
+	top: 42px;
+	background-color: #99FFCC;
+}
+#apDiv2 {
+	position: absolute;
+	width: 787px;
+	height: 481px;
+	z-index: 2;
+	left: 140px;
+	top: 159px;
+	background-color: #FFFF99;
+}
+#apDiv3 {
+	position: absolute;
+	width: 788px;
+	height: 88px;
+	z-index: 3;
+	left: 140px;
+	top: 642px;
+	background-color: #99FFFF;
+}
+#apDiv4 {
+	position: absolute;
+	width: 107px;
+	height: 115px;
+	z-index: 1;
+}
+#apDiv5 {
+	position: absolute;
+	width: 127px;
+	height: 115px;
+	z-index: 2;
+	left: 661px;
+	top: 1px;
+}
+</style>
+</head>
+
+<body background="images\icons\header.jpg ">
+<div id="grad"></div>
+<table width="auto"  align="center" border="0" bordercolor="#ff0000" style="margin-top: 100px;color:#FF0000;">
+	<tr border="2" bordercolor="#ff0000">
+		<td align="center">
+            <?php
+            if(isset($_GET ["msg"])){
+                if($_GET ["msg"]==1){
+                echo("Please Enter Your Username and Password!");
+                }
+            else if ($_GET ["msg"]==2){
+                echo("Your username or password is incorrect!");
+            }
+            else if ($_GET ["msg"]==3){
+                echo("Your username or password is incorrect!");
+            }
+            else if ($_GET ["msg"]==4){
+                echo("Your account has been inactivated.Pleaase contact Administrator!");
+            }
+            
+            }
+            ?>
+        </td>
+	</tr>
+</table>
+<div id="apDiv1">
+  <div id="apDiv4"><img src="images/Emblem_of_Sri_Lanka.svg.png" width="95" height="115" /></div>
+ <p><strong> ???????? ?????????????? - ?????????</strong></p>
+  <div id="apDiv5"><img src="images/20259350_300x300.jpg" width="97" height="86" /></div>
+</div>
+<div id="apDiv2"><div id="login_area">	
+  <a><h2>Login</h2></a>
+	
+        <form name="frmlogin" action="lib/loginhandle.php" method="post">
+	<p>	
+		<label>User Name</label>
+		<input type="text" name="txtuname" id="txtuname"/><br/>
+		<label>Password</label>
+		<input type="password" name="txtpass" id="txtpass"/>
+		<br/>
+		</p>
+                <p>
+		<input type="submit" name="signin" id="signin" value="Login" />		
+        		</p>
+	</form>	
+</div></div>
+<div id="apDiv3"></div>
+	
+
+<a href="modules/admin/add_user.php">SignUp</a>
+<br/><br/><br/><br/><br/><br/><br/>
+<footer>
+	
+</footer>
+
+</div>
+</body>
+</html>

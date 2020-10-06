@@ -1,0 +1,17 @@
+table{
+    padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+    background-color: #abcdef;
+}
+td{
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+}
+.acttitle{
+        background-color:#6699CC;
+    }
