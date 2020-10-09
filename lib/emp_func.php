@@ -81,7 +81,7 @@ if(isset($_GET["dirid"])){
 			$result = mysqli_query($con,$sql) or die("SQL Error : ".mysqli_error($con));
 											
 			$nor = $result->num_rows;
-			echo("<select class='form-control'  id='txt_subject' name='txt_subject' required><option>--Select--</option>");
+			echo("<select class='form-control'  id='txt_subject' name='txt_subject' ><option value=''>--Select--</option>");
 			if($nor>0) {
 	
 				while($rec = mysqli_fetch_assoc($result)) {
@@ -93,79 +93,44 @@ if(isset($_GET["dirid"])){
 			mysqli_close($con);
 		}
 
-		//training_needs_table
+		//training_requirements_table
 
-	if(isset($_GET["training_needs_table"])){
-		$training = $_GET["training_needs_table"];
+	if(isset($_GET["training_requirements_table"])){
+		$training = $_GET["training_requirements_table"];
 		
-		loadTrainingNeedsTable();
+		loadTrainingrequirementsTable();
 		
 	}
 	
-		function loadTrainingNeedsTable() {
-			
-			echo '<div class="col-md-12">
-                            <div class="panel panel-primary filterable scrollable" style="overflow-y: auto; overflow-x: auto">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">පුහුණු අවශ්‍යතා</h3>
-                                    <div class="pull-right">
-
-                                        <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                                    </div>
-                                </div>
-                                <div class="" >
-                                    <div class="wrapper">
-                                        <table class="table farmer_details_save_Table table-responsive" id="test">
-                                            <thead>
-                                                <tr class="filters">
-                
-                                                    <th><input type="text" class="form-control" placeholder="district" disabled name="district"></th>
-                                                    <th><input type="text" class="form-control" placeholder="unit" disabled name="unit"></th>
-                                                    <th><input type="text" class="form-control" placeholder="post" disabled name="post"></th> 
-                                                    <th><input type="text" class="form-control" placeholder="training" disabled name="training"></th> 
-                                                    <th><input type="text" class="form-control" placeholder="subject" disabled name="subject"></th>
-                                                    <th><input type="text" class="form-control" placeholder="officer_count" disabled name="officer_count"></th>
-                                                    <th><input type="text" class="form-control" placeholder="time_duration" disabled name="time_duration"></th>
-                                                                        
-                                                </tr>
-                                            </thead>
-                                            <tbody>';
+		function loadTrainingrequirementsTable() {
                                                 
-                                                $obj = new dbconnection();
-                                                $con = $obj->getcon();
-                                                $query = "SELECT * FROM `tbl_training_needs` 
-                                                LEFT JOIN tbl_district on tbl_district.district_id = tbl_training_needs.district
-                                                LEFT JOIN tbl_unit on tbl_unit.unit_id = tbl_training_needs.unit
-                                                LEFT JOIN tbl_post on tbl_post.post_id = tbl_training_needs.post
-                                                LEFT JOIN tbl_training_program on tbl_training_program.id = tbl_training_needs.training
-                                                LEFT JOIN tbl_training_subject on tbl_training_subject.id = tbl_training_needs.subject";
+                $obj = new dbconnection();
+                $con = $obj->getcon();
+                $query = "SELECT * FROM `tbl_training_requirements` 
+                LEFT JOIN tbl_district on tbl_district.district_id = tbl_training_requirements.district
+                LEFT JOIN tbl_unit on tbl_unit.unit_id = tbl_training_requirements.unit
+                LEFT JOIN tbl_post on tbl_post.post_id = tbl_training_requirements.post
+                LEFT JOIN tbl_training_program on tbl_training_program.id = tbl_training_requirements.training
+                LEFT JOIN tbl_training_subject on tbl_training_subject.id = tbl_training_requirements.subject";
 
-                                                    $sql=$query; 
-                                                    $result= mysqli_query($con,$sql);
-                                                    
-                                                while($row = mysqli_fetch_array($result)) {
+                    $sql=$query; 
+                    $result= mysqli_query($con,$sql);
+                    
+                while($row = mysqli_fetch_array($result)) {
 
-                                              echo "<tr>";
-                                        
-                                              echo "<td>" . $row['district_name']. "</td>";
-                                              echo "<td>" . $row['unit_name'] . "</td>";
-                                              echo "<td>" . $row['post_name'] . "</td>";
-                                              echo "<td>" . $row['training_program'] . "</td>";
-                                              echo "<td>" . $row['subject'] . "</td>";
-                                              echo "<td>" . $row['officer_count'] . "</td>";
-                                              echo "<td>" . $row['time_duration'] . "</td>";
-                                              
-                                              echo "</tr>";
-                                            }
-                                            echo "</table>";
-                                            mysqli_close($con);
-                                                    
-                                       echo  '   </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>';
+              echo "<tr>";
+        
+              echo "<td>" . $row['district_name']. "</td>";
+              echo "<td>" . $row['unit_name'] . "</td>";
+              echo "<td>" . $row['post_name'] . "</td>";
+              echo "<td>" . $row['training_program'] . "</td>";
+              echo "<td>" . $row['subject'] . "</td>";
+              echo "<td>" . $row['officer_count'] . "</td>";
+              echo "<td>" . $row['time_duration'] . "</td>";
+              
+              echo "</tr>";
+            }
+            mysqli_close($con);                                            
 		}
 
 require_once("connection.php");

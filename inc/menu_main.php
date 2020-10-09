@@ -84,17 +84,18 @@ mysqli_close($con);
                            
                             
                         
-                            <li class=""><a href="add_employee.php" data-hover="dropdown">Employee Reg</a>
+                            <li class=""><a href="../employee/add_employee.php" data-hover="dropdown">Employee Reg</a>
                             </li>
-                            <li class=""><a href="add_emp_training.php" data-hover="dropdown">Apply Training</a>
+                            <li class=""><a href="../employee/add_emp_training.php" data-hover="dropdown">Apply Training</a>
                             </li>
-                            <li class=""><a href="select_employee.php" data-hover="dropdown">Select Trainees</a>
+                            <li class=""><a href="../employee/select_employee.php" data-hover="dropdown">Select Trainees</a>
                             </li>
-                            <li class=""><a href="trainee_participation.php" data-hover="dropdown">Trainee Participation</a>
+                            <li class=""><a href="../employee/trainee_participation.php" data-hover="dropdown">Trainee Participation</a>
                             </li>
-                            <li class=""><a href="training_estimation.php" data-hover="dropdown">Training Estimation</a>
+                            <li class=""><a href="../employee/training_estimation.php" data-hover="dropdown">Training Estimation</a>
                             </li>                            
-                           
+                            <li class=""><a href="../admin/add_training_requirements.php" data-hover="dropdown">Training Requirements</a>
+                            </li>
 <?php
                             if($usrole == 1) {
                                 echo '<li class=""><a href="../admin/index.php" data-hover="dropdown">Admin Home</a>

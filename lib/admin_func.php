@@ -306,7 +306,112 @@ if(isset($_GET["empId"])){
 		mysqli_close($con);
     }
     
-    // add training needs
+    /* add training requirements */
+    
+    // report generate 
+    if(isset($_POST["generateReport"]))
+    {        
+        $txt_training = $_POST["txt_training"];
+        $district = $_POST["district"];
+        $txt_post = $_POST["txt_post"];
+        $txt_dir_div = $_POST["txt_dir_div"];   
+        $txt_subject = $_POST["txt_subject"];   
+        
+        $sql = "SELECT * FROM `tbl_training_requirements` 
+        LEFT JOIN tbl_district on tbl_district.district_id = tbl_training_requirements.district
+        LEFT JOIN tbl_unit on tbl_unit.unit_id = tbl_training_requirements.unit
+        LEFT JOIN tbl_post on tbl_post.post_id = tbl_training_requirements.post
+        LEFT JOIN tbl_training_program on tbl_training_program.id = tbl_training_requirements.training
+        LEFT JOIN tbl_training_subject on tbl_training_subject.id = tbl_training_requirements.subject
+        WHERE 1 ";
+        
+        if( !empty($district) ) {
+            $sql = $sql."AND tbl_training_requirements.district='".$district."'";
+        }
+        if( !empty($txt_training) ) {
+            $sql = $sql."AND tbl_training_requirements.training='".$txt_training."'";
+        }
+        if( !empty($txt_post) ) {
+            $sql = $sql."AND tbl_training_requirements.post='".$txt_post."'";
+        }
+        if( !empty($txt_dir_div) ) {
+            $sql = $sql."AND tbl_unit.dir_div_id='".$txt_dir_div."'";
+        }
+        if( !empty($txt_subject) ) {
+            $sql = $sql."AND tbl_training_requirements.subject='".$txt_subject."'";
+        }
+        require_once 'connection.php';
+        $obj = new dbconnection();
+        $con = $obj->getcon();
+        
+        $query_result = mysqli_query($con,$sql);
+        $nor = $query_result->num_rows;
+        
+        if($nor>0) {
+            
+            //create html table string 
+            $table_text = '<title>පුහුණු අවශ්‍යතා</title> 
+                            <style>
+                            table, td, th {  
+                              border: 1px solid #ddd;
+                              text-align: left;
+                            }
+                            
+                            table {
+                              border-collapse: collapse;
+                              width: 100%;
+                            }
+                            
+                            th, td {
+                              padding: 15px;
+                            }
+                            </style>
+                        <div id="divpanel" align="right">
+                        <input type="button" value="Print" onclick="prnt();" style="width: 80px; height: 30px" />&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="Close" onclick="window.close();" style="width: 80px; height: 30px" />
+                        </div>
+                        <h3>පුහුණු අවශ්‍යතා</h3>
+                        <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>දිස්ත්‍රික්කය</th>
+                            <th>ආයතනය</th>
+                            <th>තනතුර</th>
+                            <th>පුහුණු වැඩසටහන</th>
+                            <th>විෂය</th>
+                            <th>නිලධාරී ගණන</th>
+                            <th>කාල සීමාව</th>
+                          </tr>
+                        </thead>';
+            
+            while($row = mysqli_fetch_assoc($query_result)) {
+                
+                $table_text = $table_text.
+                 "<tr>".                
+                 "<td>" . $row['district_name']. "</td>".
+                 "<td>" . $row['unit_name'] . "</td>".
+                 "<td>" . $row['post_name'] . "</td>".
+                 "<td>" . $row['training_program'] . "</td>".
+                 "<td>" . $row['subject'] . "</td>".
+                 "<td>" . $row['officer_count'] . "</td>".
+                 "<td>" . $row['time_duration'] . "</td>".               
+                 "</tr>";
+            }
+            $table_text = $table_text.'<tbody></tbody></table>
+                                        <script type="text/javascript">
+                                                function prnt(){
+                                                document.getElementById("divpanel").style.display="none";
+                                                window.print();
+                                                }
+                                        </script>';
+            
+            echo $table_text;
+        }
+        else {
+            header("Location:../modules/admin/add_training_requirements.php?msg=3");
+        }
+        mysqli_close($con);               
+    }
 
     if(isset($_POST["saveTrainingProgram"]))
     {
@@ -325,10 +430,10 @@ if(isset($_GET["empId"])){
     mysqli_close($con);
     
     if($query_result>0){
-        header("Location:../modules/admin/add_training_needs.php?msg=1");
+        header("Location:../modules/admin/add_training_requirements.php?msg=1");
     }
     else {
-       header("Location:../modules/admin/add_training_needs.php?msg=2");
+       header("Location:../modules/admin/add_training_requirements.php?msg=2");
     }
     }
 
@@ -350,14 +455,14 @@ if(isset($_GET["empId"])){
     mysqli_close($con);
     
     if($query_result>0){
-        header("Location:../modules/admin/add_training_needs.php?msg=1");
+        header("Location:../modules/admin/add_training_requirements.php?msg=1");
     }
     else {
-       header("Location:../modules/admin/add_training_needs.php?msg=2");
+       header("Location:../modules/admin/add_training_requirements.php?msg=2");
     }
     }
 
-    if(isset($_POST["addTrainingNeeds"]))
+    if(isset($_POST["addTrainingrequirements"]))
     {
 
     $district = $_POST["district"];
@@ -368,7 +473,7 @@ if(isset($_GET["empId"])){
     $officer_count = $_POST["officer_count"];     
     $time_duration = $_POST["time_duration"];  
        
-    $sql = "INSERT INTO tbl_training_needs ( `district`, `unit`, `post`, `training`, `subject`, `officer_count`, `time_duration` )
+    $sql = "INSERT INTO tbl_training_requirements ( `district`, `unit`, `post`, `training`, `subject`, `officer_count`, `time_duration` )
                               VALUES ('$district', '$txt_unit', '$txt_post', '$txt_training', '$txt_subject', '$officer_count', '$time_duration')";
     
     require_once 'connection.php';
@@ -380,10 +485,10 @@ if(isset($_GET["empId"])){
     mysqli_close($con);
     
     if($query_result>0){
-        header("Location:../modules/admin/add_training_needs.php?msg=1");
+        header("Location:../modules/admin/add_training_requirements.php?msg=1");
     }
     else {
-       header("Location:../modules/admin/add_training_needs.php?msg=2");
+       header("Location:../modules/admin/add_training_requirements.php?msg=2");
     }
     }
 ?>
