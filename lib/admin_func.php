@@ -363,7 +363,7 @@ if(isset($_GET["empId"])){
                             }
                             
                             th, td {
-                              padding: 15px;
+                              padding: 5px;
                             }
                             </style>
                         <div id="divpanel" align="right">
@@ -490,6 +490,54 @@ if(isset($_GET["empId"])){
     else {
        header("Location:../modules/admin/add_training_requirements.php?msg=2");
     }
+    }
+    
+    if(isset($_POST["editTrainingProgram"]))
+    {
+        
+        $training_program_id = $_POST["training_program_id"];
+        $training_program_name = $_POST["training_program"];
+        
+        $sql = "UPDATE `tbl_training_program` SET `training_program`='$training_program_name' WHERE id='$training_program_id'";
+        
+        require_once 'connection.php';
+        $obj = new dbconnection();
+        $con = $obj->getcon();
+        
+        $query_result = mysqli_query($con,$sql);
+        
+        mysqli_close($con);
+        
+        if($query_result>0){
+            header("Location:../modules/admin/edit_training_requirements.php?msg=1");
+        }
+        else {
+            header("Location:../modules/admin/edit_training_requirements.php?msg=2");
+        }
+    }
+    
+    if(isset($_POST["editSubject"]))
+    {
+        
+        $subject_id = $_POST["subject_id"];
+        $txt_subject = $_POST["txt_subject"];
+        
+        $sql = "UPDATE `tbl_training_subject` SET `subject`='$txt_subject'  WHERE id='$subject_id'";
+        
+        require_once 'connection.php';
+        $obj = new dbconnection();
+        $con = $obj->getcon();
+        
+        $query_result = mysqli_query($con,$sql);
+        
+        mysqli_close($con);
+        
+        if($query_result>0){
+            header("Location:../modules/admin/edit_training_requirements.php?msg=1");
+        }
+        else {
+            header("Location:../modules/admin/edit_training_requirements.php?msg=2");
+        }
     }
 ?>
 

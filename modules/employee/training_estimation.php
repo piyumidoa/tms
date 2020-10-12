@@ -31,7 +31,7 @@ require_once '../../inc/header_main.php';?>
 <body>
 <div class="container-fluid">
 <div class="row">
-<legend class="scheduler-border">Training Estimation ( වියදම් ඇස්තමේන්තුව )</legend>
+<legend class="scheduler-border"> වියදම් ඇස්තමේන්තුව </legend>
 <?php
 if(isset($_GET["msg"])){
 $msg = $_GET["msg"];

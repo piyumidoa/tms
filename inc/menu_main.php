@@ -92,7 +92,7 @@ mysqli_close($con);
                             </li>
                             <li class=""><a href="../employee/trainee_participation.php" data-hover="dropdown">Trainee Participation</a>
                             </li>
-                            <li class=""><a href="../employee/training_estimation.php" data-hover="dropdown">Training Estimation</a>
+                            <li class=""><a href="../employee/training_estimation.php" data-hover="dropdown">Estimation</a>
                             </li>                            
                             <li class=""><a href="../admin/add_training_requirements.php" data-hover="dropdown">Training Requirements</a>
                             </li>

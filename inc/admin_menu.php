@@ -47,7 +47,7 @@
                             </li>
                             <li class=""><a href="add_unit.php" data-hover="dropdown">අධ්‍යක්ෂ අංශ</a>
                             </li>
-                            <li class=""><a href="add_training_requirements.php" data-hover="dropdown">පුහුණු අවශ්‍යතා</a>
+                            <li class=""><a href="edit_training_requirements.php" data-hover="dropdown">පුහුණු අවශ්‍යතා</a>
                             </li>
                                   
                     </ul>

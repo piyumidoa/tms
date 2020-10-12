@@ -133,6 +133,34 @@ if(isset($_GET["dirid"])){
             mysqli_close($con);                                            
 		}
 
+		
+		if(isset($_GET["subjects_table"])){
+		    $training_id = $_GET["subjects_table"];
+		    
+		    loadSubjectsTable($training_id);
+		    
+		}
+		
+		function loadSubjectsTable($training_id) {
+		    
+		    $obj = new dbconnection();
+		    $con = $obj->getcon();
+		    $query = "SELECT * FROM `tbl_training_subject` WHERE `training`=".$training_id;
+		    
+		    $sql=$query;
+		    $result= mysqli_query($con,$sql);
+		    
+		    while($row = mysqli_fetch_array($result)) {
+		        
+		        echo "<tr>";		        
+		        echo "<td>" . $row['id']. "</td>";
+		        echo "<td>" . $row['subject'] . "</td>";
+		        echo "<td> <a href='edit_training_requirements.php?subject=".$row['id']."'><img src='../../images/icons/edit.png' style='width: 25px; height: 25;'></td>";
+		        echo "</tr>";
+		    }
+		    mysqli_close($con);
+		}
+		
 require_once("connection.php");
 
 

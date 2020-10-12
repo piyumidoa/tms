@@ -498,7 +498,7 @@ if(isset($_GET["msg"])) {
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label"> Subject </label>
+                                            <label class="col-md-2 control-label"> විෂය </label>
                                             <div class="col-md-10">
                                                 <span name="subject_list">
                                                     <select  class="form-control"  name="txt_subject" id="txt_subject" >
