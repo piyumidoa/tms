@@ -350,7 +350,7 @@ if(isset($_GET["empId"])){
         if($nor>0) {
             
             //create html table string 
-            $table_text = '<title>පුහුණු අවශ්‍යතා</title> 
+            $table_text = '<meta charset="UTF-8"><title>පුහුණු අවශ්‍යතා</title> 
                             <style>
                             table, td, th {  
                               border: 1px solid #ddd;
