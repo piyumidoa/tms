@@ -504,7 +504,9 @@ if(isset($_GET["empId"])){
                     if($nor2 >0) {
                         while($rec1 = mysqli_fetch_assoc($result3)) {
                             
-                            $table_text = $table_text.'<td>'.$rec1['sum_officer'].'</td>';
+                            $sum_officer = (($rec1['sum_officer'] >0) ? $rec1['sum_officer'] : 0);
+                            $table_text = $table_text.'<td>'.$sum_officer.'</td>';
+
                         }    
                     }             
                 }    
