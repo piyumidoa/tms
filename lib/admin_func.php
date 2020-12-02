@@ -413,6 +413,117 @@ if(isset($_GET["empId"])){
         mysqli_close($con);               
     }
 
+    // report generate 
+    if(isset($_POST["generateSummery"]))
+    {        
+        
+        require_once 'connection.php';
+        $obj = new dbconnection();
+        $con = $obj->getcon();
+
+        $txt_training = $_POST["txt_training"]; 
+
+        $sql = "SELECT DISTINCT * FROM tbl_training_program WHERE id=$txt_training";
+        
+        $result = mysqli_query($con,$sql);
+        $nor = $result->num_rows;
+        
+        if($nor>0) {
+            while($rec = mysqli_fetch_assoc($result)) {
+
+                $tname = $rec["training_program"];            
+                break;
+            }
+        } 
+        
+        //create html table string 
+        $table_text = '<title>පුහුණු අවශ්‍යතා : '.$tname.'</title> 
+        <style>
+        table, td, th {  
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+        
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          padding: 5px;
+        }
+        </style>
+    <div id="divpanel" align="right">
+    <input type="button" value="Print" onclick="prnt();" style="width: 80px; height: 30px" />&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Close" onclick="window.close();" style="width: 80px; height: 30px" />
+    </div>
+    <h3>පුහුණු අවශ්‍යතා : '.$tname.'</h3>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>තනතුර : දිස්ත්‍රික්කය</th>';
+
+    // table headers from district names
+    $sql1 = "SELECT DISTINCT * FROM tbl_district ORDER BY district_id;";
+            $result1 = mysqli_query($con,$sql1);
+            $nor = $result1->num_rows;
+            
+            $district_array = array();
+            if($nor>0) {
+                while($rec1 = mysqli_fetch_assoc($result1)) {
+
+                    $district_name = $rec1["district_name"];
+                    $table_text = $table_text.'<th>'.$district_name.'</th>';//print names
+                    $district_id = $rec1["district_id"];
+                    array_push($district_array, $district_id);//generate id array
+                }
+            }
+            $table_text = $table_text.'<th>Total</th></tr></thead>';
+        
+        $sql2 = "SELECT * FROM `tbl_post` ORDER BY `tbl_post`.`post_name` ASC";
+        $result2 = mysqli_query($con,$sql2);
+        $nor2 = $result2->num_rows;
+        
+        if($nor2>0) {
+            while($rec2 = mysqli_fetch_assoc($result2)) {
+
+                $post_name = $rec2["post_name"];
+                $post_id = $rec2["post_id"];
+                
+                $table_text = $table_text.'<tr><td>'.$post_name.'</td>';
+                $nor1 = $result1->num_rows;
+                $result1 = mysqli_query($con,$sql1);
+                foreach($district_array as $district_id) {
+
+                    $sql3 = "SELECT SUM(tbl_training_requirements.officer_count) as sum_officer 
+                    FROM tbl_training_requirements WHERE 
+                    post = ".$post_id." AND district=".$district_id." AND training=".$txt_training;
+                    $result3 = mysqli_query($con,$sql3);
+                    $nor2 = $result2->num_rows;
+
+                    if($nor2 >0) {
+                        while($rec1 = mysqli_fetch_assoc($result3)) {
+                            
+                            $table_text = $table_text.'<td>'.$rec1['sum_officer'].'</td>';
+                        }    
+                    }             
+                }    
+                $table_text = $table_text.'<td></td></tr>';            
+            }
+        }         
+            $table_text = $table_text.'<tbody></tbody></table>
+                                        <script type="text/javascript">
+                                                function prnt(){
+                                                document.getElementById("divpanel").style.display="none";
+                                                window.print();
+                                                }
+                                        </script>';
+            
+            echo $table_text;
+        
+        mysqli_close($con);               
+    }
+
     if(isset($_POST["saveTrainingProgram"]))
     {
 

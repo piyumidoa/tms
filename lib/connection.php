@@ -18,7 +18,7 @@ class dbconnection{
 	function getcon(){
 	$con=mysqli_connect($this->iSERVER,$this->iUSER,$this->iPASS,$this->iDATABASE)
 	or die ("Server Error".mysqli_error());
-	//$con->set_charset('utf8');
+	$con->set_charset('utf8');
     return $con;
     }
 

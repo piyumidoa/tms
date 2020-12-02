@@ -517,6 +517,54 @@ if(isset($_GET["msg"])) {
             					</div>                                                       
                             </fieldset>
         				</div>  
+        				
+        				<div class="col-md-12">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">සාරාංශ වාර්තාව</legend>
+                                <div class="col-md-11">
+                                    <div class="form-horizontal">
+                                        <form name="generateReport" id="generateReport" method="POST" action="../../lib/admin_func.php" target="_blank">
+
+                                        
+                                        
+                                        
+										<div class="form-group">
+                                            <label class="col-md-2 control-label">පුහුණු වැඩසටහන</label>
+                                            <div class="col-md-10">                                                    
+                                                <select class="form-control" id='txt_training' name='txt_training' onChange="loadSubjects(this.value);">                                             
+                                                    <?php 
+                                                    echo("<option value=''>ALL</option>");
+                                                    require_once '../../lib/connection.php';
+
+                                                    $dbobj = new dbConnection();
+                                                    $con = $dbobj->getCon();
+                                                    
+                                                    $sql = "SELECT DISTINCT * FROM tbl_training_program WHERE 1;";
+                                                    $result = mysqli_query($con,$sql);
+                                                    $nor = $result->num_rows;
+                                                    
+                                                    if($nor>0) {
+                                                      while($rec = mysqli_fetch_assoc($result)) {
+                                                        $tname = $rec["training_program"];
+                                                        echo("<option value='".$rec["id"]."'>".$tname."</option>");
+                                                      }
+                                                    } 
+                                                    mysqli_close($con);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-success" id="generateSummery" name="generateSummery"/>
+                                            <input type="reset" class="btn btn-default" id="cancelgenerateSummery" name="cancelgenerateSummery"/>
+                                        </div>
+                    					</form>
+                					</div>
+            					</div>                                                       
+                            </fieldset>
+        				</div>  
 
                     <div class="row">
                     <div class="col-md-2"></div>
