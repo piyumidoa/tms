@@ -493,6 +493,8 @@ if(isset($_GET["empId"])){
                 $table_text = $table_text.'<tr><td>'.$post_name.'</td>';
                 $nor1 = $result1->num_rows;
                 $result1 = mysqli_query($con,$sql1);
+                
+                $row_total = 0;
                 foreach($district_array as $district_id) {
 
                     $sql3 = "SELECT SUM(tbl_training_requirements.officer_count) as sum_officer 
@@ -506,11 +508,11 @@ if(isset($_GET["empId"])){
                             
                             $sum_officer = (($rec1['sum_officer'] >0) ? $rec1['sum_officer'] : 0);
                             $table_text = $table_text.'<td>'.$sum_officer.'</td>';
-
+                            $row_total = $row_total + $sum_officer;
                         }    
                     }             
                 }    
-                $table_text = $table_text.'<td></td></tr>';            
+                $table_text = $table_text.'<td>'.$row_total.'</td></tr>';            
             }
         }         
             $table_text = $table_text.'<tbody></tbody></table>
